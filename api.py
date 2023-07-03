@@ -158,6 +158,3 @@ if __name__ == "__main__":
         countries=args.countries, size=args.size, page=args.page, 
         csv_path=os.path.join(args.output or os.getcwd(), "company_data.csv")
     )
-
-# test:
-# python api.py -o C:\Users\Raptor\Downloads -i data-science -io or -co US GB

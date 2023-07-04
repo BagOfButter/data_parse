@@ -150,7 +150,7 @@ if __name__ == "__main__":
 
     is_cli = args.industries or args.revenues or args.employees or args.cities or args.countries
     if args.output and not os.path.exists(args.output):
-        exit("Invalid path:", args.output)
+        exit(f"Invalid path: {args.output}")
 
     parse_companies(
         api_token=args.api_token, industries=args.industries, i_operator=args.i_operator,

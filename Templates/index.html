@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>data_parse</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <form action = "/" method = "POST">
+    <h4>Filters</h4>
+    <p>API token:</p> 
+    <input type = 'text' name = 'api_token' value = {{api_token}}>
+    <p>Countries:</p> 
+    <input type = 'text' name = 'countries' value = {{','.join(countries) if countries != [] else ''}}>
+    <p>Cities:</p> 
+    <input type = 'text' name = 'cities' value = {{','.join(cities) if cities != [] else ''}}>
+    <p>Industries:</p> 
+    <input type = 'text' name = 'industries' value = {{','.join(industries) if industries != [] else ''}}>
+    <div>
+      Industries operator:
+      <input type="radio" name="i_operator" value="or" {{'checked="checked"' if i_operator == 'or' else ""}}> or
+      <input type="radio" name="i_operator" value="and" {{'checked="checked"' if i_operator == 'and' else ""}}> and 
+    </div> 
+    <p>Revenue:</p> 
+    {% for revenue in revenues_possible_values %}
+      <input type="checkbox" value={{revenue}} name='revenue' {{'checked="checked"' if revenue in r_chosen_values else ""}}> {{revenue}}
+    {% endfor %}
+    <p>Employees:</p> 
+    {% for employees in employees_possible_values %}
+      <input type="checkbox" value={{employees}} name='employees' {{'checked="checked"' if employees in e_chosen_values else ""}}> {{employees}}
+    {% endfor %}
+    <p>Size:</p> 
+    <input type = 'text' name = 'output_size' value = {{output_size}}>
+    <p>Page:</p> 
+    <input type = 'text' name = 'page' value = {{page}}>
+    <h4>Export</h4>
+    <p>Submit export <input type="checkbox" name='csv_checkbox'></p>
+    <p>Path</p> <input type = 'text' value = '' name = 'csv_path' value = {{csv_path}}>
+    <input type = "submit" value = "APPLY">
+  </form>
+  <p style="color:red;"><strong>{{ error }}</strong></p>
+  <div>
+    {% for table in tables %}
+      {{ table|safe }}
+    {% endfor %}
+  </div>
+</body>
+</html>
